@@ -8,6 +8,10 @@ class Util{
   static void  navigateTo(BuildContext context, Widget screen){
     Navigator.push(context,MaterialPageRoute(builder: (context) => screen ));
   }
+  static void  clearStackAndNavigateTo(BuildContext context, Widget screen){
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => screen), (route) => false);
+  }
 
 }
 
