@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:password_manager/data/enum/storage_keys.dart';
 import 'package:password_manager/data/shared_preference.dart';
-import 'package:password_manager/screens/home_page.dart';
+import 'package:password_manager/screens/home_screen.dart';
 import 'package:password_manager/utils/common_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,6 +13,9 @@ final FirebaseAuth auth = FirebaseAuth.instance;
 
  isUserLoggedIn(){
    return auth.currentUser!=null;
+}
+User? currentUser(){
+   return auth.currentUser;
 }
 
 googleSignIn(BuildContext context,

@@ -10,6 +10,9 @@ class IconConstant{
   static const String icFb="assets/image/icons/logo_fb.png";
   static const String icLinkedin="assets/image/icons/logo_linkedin.png";
   static const String icMail="assets/image/icons/ic_mail.png";
+  static const String icHome="assets/icon/ic_home.png";
+  static const String icPassword="assets/icon/ic_password.png";
+  static const String icProfile="assets/icon/ic_profile.png";
 }
 class FontsFamily {
   static const String gilroyNormal = "Gilroy-normal";

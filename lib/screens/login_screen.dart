@@ -5,7 +5,7 @@ import 'package:password_manager/constant/constant.dart';
 import 'package:password_manager/data/enum/Provider.dart';
 import 'package:password_manager/data/enum/storage_keys.dart';
 import 'package:password_manager/data/shared_preference.dart';
-import 'package:password_manager/screens/home_page.dart';
+import 'package:password_manager/screens/home_screen.dart';
 import 'package:password_manager/screens/signup_screen.dart';
 import 'package:password_manager/utils/app_util.dart';
 import 'package:password_manager/utils/common_util.dart';
@@ -25,7 +25,6 @@ class _LoginScreen extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    checkForUserLoggedIn(context);
     return Scaffold(
       backgroundColor: ColorConstant.colorBgFFFFFF,
       body: SingleChildScrollView(

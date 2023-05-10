@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:password_manager/constant/constant.dart';
-import 'package:password_manager/screens/home_page.dart';
+import 'package:password_manager/screens/home_screen.dart';
 import 'package:password_manager/screens/login_screen.dart';
 import 'package:password_manager/screens/signup_screen.dart';
 import 'package:password_manager/utils/app_util.dart';
