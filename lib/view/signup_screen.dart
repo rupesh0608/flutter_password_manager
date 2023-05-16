@@ -1,9 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:password_manager/constant/constant.dart';
-import 'package:password_manager/screens/login_screen.dart';
+import 'package:password_manager/utils/util_extensions.dart';
+import 'package:password_manager/view/home_screen.dart';
+import 'package:password_manager/view/login_screen.dart';
 
 import '../utils/common_util.dart';
+import '../utils/utility.dart';
+import '../view_model/auth_controller.dart';
+import 'Common/common_widgets.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -13,6 +19,13 @@ class Signup extends StatefulWidget {
 }
 
 class _signup extends State<Signup> {
+  AuthController authController = Get.find();
+
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passWordController = TextEditingController();
+  bool _passwordVisible = false;
   bool passwordVisible = false;
 
   @override
@@ -22,7 +35,7 @@ class _signup extends State<Signup> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: ColorConstant.color667085),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () =>Get.back(),
         ),
         backgroundColor: ColorConstant.colorBgFFFFFF,
         elevation: 0,
@@ -49,10 +62,8 @@ class _signup extends State<Signup> {
                     fontSize: 14,
                     fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
-            TextFormField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Enter First Name.'),
-            ),
+            editTextField(
+                "First Name".tr, firstNameController, false, "", false),
             const SizedBox(height: 18),
             const Text("Last Name",
                 style: TextStyle(
@@ -60,10 +71,7 @@ class _signup extends State<Signup> {
                     fontSize: 14,
                     fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
-            TextFormField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Enter Last Name.'),
-            ),
+            editTextField("Last Name".tr, lastNameController, false, "", false),
             const SizedBox(height: 18),
             const Text("E-mail",
                 style: TextStyle(
@@ -71,16 +79,7 @@ class _signup extends State<Signup> {
                     fontSize: 14,
                     fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
-            TextFormField(
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  prefixIcon: ImageIcon(
-                    const AssetImage(IconConstant.icMail),
-                    color: ColorConstant.color312E49,
-                    size: 16,
-                  ),
-                  hintText: 'Enter your Email'),
-            ),
+            editTextField("Email id".tr, emailController, false, "", false),
             const SizedBox(height: 18),
             const Text("Password",
                 style: TextStyle(
@@ -88,33 +87,13 @@ class _signup extends State<Signup> {
                     fontSize: 14,
                     fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
-            TextFormField(
-              obscureText: passwordVisible,
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  prefixIcon: ImageIcon(
-                    const AssetImage(IconConstant.icLock),
-                    color: ColorConstant.color312E49,
-                    size: 16,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: ColorConstant.color747980),
-                    onPressed: () {
-                      setState(
-                        () {
-                          passwordVisible = !passwordVisible;
-                        },
-                      );
-                    },
-                  ),
-                  hintText: 'Enter your password.'),
-              keyboardType: TextInputType.visiblePassword,
-              textInputAction: TextInputAction.done,
-            ),
+            editTextField(
+                "Password".tr, passWordController, true, "", _passwordVisible,
+                onPressed: () {
+              setState(() {
+                _passwordVisible = !_passwordVisible;
+              });
+            }),
             const SizedBox(height: 17),
             RichText(
               text: TextSpan(
@@ -166,7 +145,7 @@ class _signup extends State<Signup> {
             SizedBox(
               height: 43,
               child: ElevatedButton(
-                  onPressed: () => {},
+                  onPressed: () => register(),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorConstant.colorB4AAF2,
                     minimumSize: const Size.fromHeight(40),
@@ -214,5 +193,40 @@ class _signup extends State<Signup> {
         ),
       ))),
     );
+  }
+
+  register() async {
+    if (firstNameController.text.isEmpty) {
+      "Please enter your FirstName".tr.toast();
+    } else if (lastNameController.text.isEmpty) {
+      "Please enter LastName".tr.toast();
+    } else if (!emailController.text.isEmail) {
+      "Please enter valid email address".tr.toast();
+    } else if (passWordController.text.isEmpty) {
+      "Please enter Password".tr.toast();
+    } else {
+      launchProgress();
+      var res = await authController.register(
+          firstNameController.text.trim(),
+          lastNameController.text.trim(),
+          emailController.text.trim(),
+          passWordController.text.trim(),
+          passWordController.text.trim());
+      disposeProgress();
+      if (!res.error!) {
+        clearFields();
+        res.message?.trim().tr.toast();
+        Get.offAll(const LoginScreen());
+      } else {
+        res.message?.trim().tr.toast();
+      }
+    }
+  }
+
+  clearFields() {
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    passWordController.clear();
   }
 }

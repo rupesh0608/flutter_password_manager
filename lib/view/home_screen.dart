@@ -1,23 +1,15 @@
 import 'dart:async';
 
-import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:password_manager/constant/constant.dart';
-import 'package:password_manager/data/enum/Provider.dart';
-import 'package:password_manager/data/enum/storage_keys.dart';
-import 'package:password_manager/data/shared_preference.dart';
-import 'package:password_manager/screens/home_screen/password_page.dart';
-import 'package:password_manager/screens/home_screen/profile_page.dart';
-import 'package:password_manager/screens/login_screen.dart';
-import 'package:password_manager/screens/signup_screen.dart';
-import 'package:password_manager/utils/app_util.dart';
 import 'package:password_manager/utils/firebase_auth_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/common_util.dart';
 import 'home_screen/home_page.dart';
+import 'home_screen/password_page.dart';
+import 'home_screen/profile_page.dart';
+import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -43,10 +35,6 @@ class _HomeScreen extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstant.colorBgFFFFFF,
-      appBar: AppBar(
-        backgroundColor: ColorConstant.colorBgFFFFFF,
-        elevation: 0,
-      ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: ColorConstant.colorBgFFFFFF,

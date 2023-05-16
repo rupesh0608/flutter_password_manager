@@ -13,9 +13,21 @@ class IconConstant{
   static const String icHome="assets/icon/ic_home.png";
   static const String icPassword="assets/icon/ic_password.png";
   static const String icProfile="assets/icon/ic_profile.png";
+  static const String icNotification="assets/icon/ic_notification.png";
+  static const String icSearch="assets/icon/ic_search.png";
+  static const String icSocials="assets/icon/ic_socials.png";
+  static const String icApps="assets/icon/ic_apps.png";
+  static const String icWallet="assets/icon/ic_wallet.png";
+}
+
+
+class Field{
+  static const  FIELD_LOGIN="login";
 }
 class FontsFamily {
   static const String gilroyNormal = "Gilroy-normal";
+  static const String gilroyBold = "Gilroy-bold";
+  static const String gilroySemiBold = "Gilroy-semi-bold";
 }
 
 class ColorConstant {
@@ -38,4 +50,8 @@ class ColorConstant {
   static Color colorB4AAF2 = hexToColor('#B4AAF2');
   static Color colorCDCED1 = hexToColor('#CDCED1');
   static Color colorEBE9F1 = hexToColor('#EBE9F1');
+  static Color colorC4C4C4 = hexToColor('#C4C4C4');
+  static Color color1A181B = hexToColor('#1A181B');
+  static Color color130F26 = hexToColor('#130F26');
+  static Color color8F8F8F = hexToColor('#8F8F8F');
 }
